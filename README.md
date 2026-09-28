@@ -6,23 +6,19 @@ You answer questions and approve the design; an orchestrator then runs many suba
 
 ## Get started
 
+**The quality of the output is related to the quality of the input, it could be figma exports, pdf's, txt files, claude design exports, api schemas, screenshots or other reference materials in the `input/` folder. This includes third party services the application might communicate with.**
+
+This is meant to be running on a sandbox, VM or another location with actual access to the CLI, internet etc. It does not require any credentials or so.
+
 ```bash
 git clone <this repo> my-project && cd my-project
 rm -rf .git && git init -b main    # start clean; the skill offers this too
-```
-Bring whatever you have: drop files in `input/`, point at them anywhere on disk, paste text or links into the chat when running the skill. Earlier design exports, notes, screenshots, API docs: all fine, none of it is treated as final.
-
-**The quality of the output is related to the quality of the input, features planned more extensively beforehand turns out much better compared to last-minute content**
-
-## Running it
-Assuming you have now provided the input you want, it could be figma exports, pdf's, txt files, claude design exports, api schemas, screenshots or other reference materials in the `input/` folder you start up claude with bypassPermissions. 
-During the first step you can provide either the writeup about your project or link to the files and folders you have prepared for context. The minimal should be the full project description, step 2 will take you through the preparations and ask follow-up questions while step 3 is the long running loop as explained below.
-
-**Opus 5.5 xhigh or Fable 5.1 high recommended, subagents will use different models depending on task either way**
-
-```bash
+# Opus 5.5 xhigh or Fable 5.1 high recommended, subagents will use different models depending on task either way
 claude --permission-mode=bypassPermissions # Trigger the /start-project skill together with your initial description of the project or the location of the files/folders you have provided
 ```
+
+## Running it
+During the first step you can provide either the writeup about your project or link to the files and folders you have prepared for context. The minimal should be the full project description, step 2 will take you through the preparations and ask follow-up questions while step 3 is the long running loop as explained below.
 
 What to expect:
 

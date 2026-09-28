@@ -1,0 +1,37 @@
+[
+  {
+    "name": "restart-billing",
+    "route": "/?flyout=service:svc-billing",
+    "steps": [
+      { "shot": "billing-before" },
+      { "click": "@restartService" },
+      { "expect": { "text": "Restarted Billing" } },
+      { "shot": "billing-after", "selector": "@flyout-service" }
+    ]
+  },
+  {
+    "name": "search-degrades",
+    "route": "/",
+    "steps": [
+      { "expect": { "text": "1 of 6 services need attention." } },
+      { "advance": "65s" },
+      { "wait": 5200 },
+      { "expect": { "text": "2 of 6 services need attention." } },
+      { "nav": "/?tab=activity" },
+      { "expect": { "text": "Search latency above 400 ms" } },
+      { "shot": "activity-after-beat" }
+    ]
+  },
+  {
+    "name": "flyout-back-closes",
+    "route": "/",
+    "steps": [
+      { "click": "@open-svc-search" },
+      { "wait_for": "@flyout-service" },
+      { "back": true },
+      { "expect": { "gone": "@flyout-service" } },
+      { "forward": true },
+      { "expect": { "visible": "@flyout-service" } }
+    ]
+  }
+]

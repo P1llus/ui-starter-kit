@@ -1,0 +1,31 @@
+# Agent working files: screenshots, logs, scripts, notes, frozen builds
+work/*
+!work/briefs/
+!work/playbook/
+!work/rulings.md
+!work/intake/
+work/intake/renders/
+work/intake/text/
+
+# What the user brings (can be large or private); input/README.md stays
+input/*
+!input/README.md
+
+# Design board renders (scratch/render_boards.py makes them again)
+design/png/
+
+# Node / Vite
+node_modules/
+dist/
+*.tsbuildinfo
+.vite/
+ui/.tanstack/
+
+# Python scratch env
+scratch/.venv/
+scratch/.chrome-path
+__pycache__/
+
+# Editors / OS
+.DS_Store
+*:Zone.Identifier

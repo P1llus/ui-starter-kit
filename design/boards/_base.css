@@ -1,0 +1,74 @@
+/*
+ * Canvas infrastructure for the static design boards. Every canvas file links this file and
+ * ../tokens.css (generated from the installed theme: `npm run tokens` in ui/).
+ *
+ * A canvas is one HTML file with several boards:
+ *   <main class="canvas">
+ *     <section class="board" data-board="global-page" data-caption="Global page · nav expanded">
+ *       <div class="frame"> ...the mock at 1440x900... </div>
+ *     </section>
+ *     <section class="board" data-board="global-page-dark" data-theme="dark" ...>
+ *   </main>
+ *
+ * scratch/render_boards.py screenshots each .frame to design/png/<canvas>/<board>.png.
+ * Shared primitives (buttons, badges, tables...) live in _kit.css, owned by the first
+ * components board. This file only sets up fonts, the canvas and the frames.
+ */
+@import url('../tokens.css');
+
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('../../ui/node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 500; src: url('../../ui/node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('../../ui/node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; src: url('../../ui/node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Roboto Mono'; font-weight: 400; src: url('../../ui/node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Roboto Mono'; font-weight: 700; src: url('../../ui/node_modules/@fontsource/roboto-mono/files/roboto-mono-latin-700-normal.woff2') format('woff2'); }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #4a5160;
+  font-family: var(--font-family);
+  font-size: var(--font-s);
+  line-height: 1.5;
+  color: var(--color-textParagraph);
+  -webkit-font-smoothing: antialiased;
+}
+
+.canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 40px;
+  width: max-content;
+}
+
+.board-caption {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1f4fa;
+}
+
+.board-note {
+  margin: 0 0 12px;
+  max-width: 1440px;
+  font-size: 13px;
+  color: #c9d1de;
+}
+
+/* The mock itself. Default 1440x900; set --frame-w / --frame-h on the section for other sizes. */
+.frame {
+  position: relative;
+  width: var(--frame-w, 1440px);
+  height: var(--frame-h, 900px);
+  overflow: hidden;
+  background: var(--color-backgroundBasePlain);
+  color: var(--color-textParagraph);
+}
+
+.frame code,
+.frame .mono {
+  font-family: var(--font-family-code);
+  font-size: 0.93em;
+}

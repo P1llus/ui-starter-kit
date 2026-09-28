@@ -1,0 +1,12 @@
+/*
+ * Global CSS for code that does not use Emotion (plain CSS, SVG, canvas).
+ * Prefer EUI tokens via useEuiTheme() in components.
+ * App sets data-color-mode="light|dark" on <html>.
+ */
+:root {
+  color-scheme: light;
+}
+
+:root[data-color-mode='dark'] {
+  color-scheme: dark;
+}

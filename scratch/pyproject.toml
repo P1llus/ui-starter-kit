@@ -1,0 +1,9 @@
+[project]
+name = "prototype-scratch"
+version = "0.1.0"
+description = "Tools for building and reviewing the UI prototype: screenshots, flows, design board renders, doc checks, session maps"
+requires-python = ">=3.10"
+dependencies = [
+    "playwright>=1.55",
+    "pillow>=11",
+]

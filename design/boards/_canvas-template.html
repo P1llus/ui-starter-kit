@@ -1,0 +1,71 @@
+<!doctype html>
+<!--
+  Canvas template for step 2 design boards. Copy to design/boards/<nn>-<topic>.html.
+  render_boards.py skips files whose names start with _, so this template is never rendered.
+  - One canvas per topic (shell, core components, data components, overlays, pages).
+  - Each <section class="board"> is one PNG: data-board is the file name, data-caption the caption.
+  - Draw the mock inside .frame (1440x900 by default; set --frame-h for taller boards).
+  - Add data-theme="dark" on a section to draw it with the dark tokens.
+  - Colours, sizes, fonts and radii come from ../tokens.css (generated from the real theme).
+  - Shared primitives go in _kit.css (owned by the core components canvas); canvas-only styles
+    stay in this file's <style>.
+  Render your canvas into your session folder (only the orchestrator renders into design/png):
+    (cd scratch && uv run python render_boards.py ../design/boards/<file>.html --out ../work/sessions/<task-id>/png)
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Shell and layout</title>
+  <link rel="stylesheet" href="_base.css">
+  <link rel="stylesheet" href="_kit.css">
+  <style>
+    .shell { display: grid; grid-template-rows: 48px 1fr; height: 100%; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 0 var(--size-base);
+              border-bottom: var(--border-width-thin) solid var(--color-borderBaseSubdued); }
+    .body { display: grid; grid-template-columns: 220px 1fr; min-height: 0; }
+    .nav { padding: var(--size-s); border-right: var(--border-width-thin) solid var(--color-borderBaseSubdued); }
+    .nav a { display: block; padding: 6px 10px; border-radius: var(--radius-medium); color: var(--color-textParagraph);
+             text-decoration: none; }
+    .nav a.active { background: var(--color-backgroundBaseInteractiveSelect); color: var(--color-textPrimary); }
+    .main { padding: var(--size-l); }
+    h1 { margin: 0 0 4px; font-size: var(--font-xl); color: var(--color-textHeading); font-weight: var(--weight-bold); }
+    .desc { color: var(--color-textSubdued); margin: 0 0 var(--size-l); }
+  </style>
+</head>
+<body>
+<main class="canvas">
+  <section class="board" data-board="global-page" data-caption="Global page · side nav expanded · one question per page">
+    <h2 class="board-caption">Global page · side nav expanded</h2>
+    <p class="board-note">What this board decides: header height, nav width and grouping, page padding, title and description.</p>
+    <div class="frame">
+      <div class="shell">
+        <div class="header"><strong>Product</strong><span class="mono">user@example</span></div>
+        <div class="body">
+          <nav class="nav"><a class="active">Home</a><a>Items</a><a>Settings</a></nav>
+          <div class="main">
+            <h1>Home</h1>
+            <p class="desc">One line stating what this page shows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="board" data-board="global-page-dark" data-theme="dark" data-caption="Global page · dark">
+    <h2 class="board-caption">Global page · dark</h2>
+    <div class="frame">
+      <div class="shell">
+        <div class="header"><strong>Product</strong><span class="mono">user@example</span></div>
+        <div class="body">
+          <nav class="nav"><a class="active">Home</a><a>Items</a><a>Settings</a></nav>
+          <div class="main">
+            <h1>Home</h1>
+            <p class="desc">One line stating what this page shows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# One route per line, for screenshot sweeps:
+#   uv run python shoot.py --base http://localhost:<port> --out <dir> --routes-file routes.txt --theme both --warnings
+# Keep it current: every page, every tab (?tab=), and one owned flyout per flyout kind (?flyout=<kind>:<id>).
+# The lines below are the kit's sample pages; replace them with the project's routes.
+/
+/?tab=activity
+/?flyout=service:svc-billing
+/?flyout=service:svc-search&ftab=activity
+/dev
+/dev/smoke
+/dev/mock
+/dev/mock?tab=sample
+/dev/components

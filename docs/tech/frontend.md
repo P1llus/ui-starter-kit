@@ -83,16 +83,31 @@ The biggest speed-up for building and reviewing: a screenshot of any state is on
 
 ## Code rules
 
-- EUI components first. Check props in the installed version (`ui/node_modules/@elastic/eui/eui.d.ts`, or a local EUI clone if AGENTS.md names one); memory is often a major version behind. Wrap a component only where its doc in `docs/components/` says why.
+- EUI components first, following [EUI](#eui) below. Wrap a component only where its doc in `docs/components/` says why.
 - Colours, spacing and fonts from `useEuiTheme()` tokens. No hex values; no magic pixel numbers except documented widths.
 - Styling with the `css` prop. No new global CSS without a reason in this doc.
 - Mock data only through `@/mock` (lint blocks deep imports).
 - In-app links through the router (`AppLink` or `navigate`). A wrapper that drops the click event lets the browser follow the href, which reloads the app and resets the mock world.
 - Dates, times, numbers, sizes and durations only through `@/lib/format` (lint blocks `toLocale*`). Conventions: [design/conventions.md](../design/conventions.md).
 - State words through `StatusBadge` (`@/components/status`): one word, one colour everywhere.
-- Icon names typed with EUI's icon type, so a wrong name fails typecheck instead of rendering a blank box.
+- Icon names typed as `EuiIconType` from `@/theme`, so a wrong name fails typecheck instead of rendering a blank box. EUI's exported `IconType` accepts any string and checks nothing.
 - No `any`. Files under about 300 lines; split by component.
 - UI copy: sentence case, plain words, the glossary's terms, no backend words.
+
+## EUI
+
+Memory is usually several majors behind the installed version (122 when the kit was made). These traps each broke builds in the project this kit came from.
+
+- Check a name before using it: `(cd ui && node -e "console.log('EuiCollapsibleNav' in require('@elastic/eui'))")`. `eui.d.ts` also declares internal modules (`EuiFlyoutManager`, `EuiFlyoutChild`, `useFlyoutManager`) that fail to import. For props, read the type in `ui/node_modules/@elastic/eui/eui.d.ts`, or the component's `.tsx` and `*.stories.tsx` in the local clone if AGENTS.md names one. The clone's website docs still show some removed props, and its `main` can run ahead of the installed version (`packages/eui/changelogs/upcoming/`).
+- Removed props: `size` on `EuiContextMenu`, `EuiContextMenuPanel`, `EuiContextMenuItem`, `EuiListGroup` and `EuiListGroupItem`; `flush` and `gutterSize` on `EuiListGroup`; `hasDividers` on `EuiSuperSelect` items; `delay` on `EuiToolTip` and `EuiIconTip`; `color="accent"` on `EuiCallOut`; `iconType` and text children on `EuiHeaderLogo` (use `logoType`).
+- Removed components: `EuiPageContent`, `EuiPageContentBody` (use `EuiPageTemplate` or `EuiPageSection`), `EuiPageSideBar` (now `EuiPageSidebar`), `EuiLoadingContent` (`EuiSkeletonText`), `EuiCodeEditor`, `EuiControlBar`.
+- Side nav: `EuiCollapsibleNav` with `EuiCollapsibleNavGroup` sections, placed in an `EuiHeaderSectionItem` where its toggle `button` renders; `isDocked` keeps it open on wide screens. `EuiCollapsibleNavBeta` and its `Item`/`Button` were removed in v118, and `EuiCollapsibleSideNav` never existed. Example: `collapsible_nav.stories.tsx` (`FullHeaderPattern`) in the clone.
+- Flyout sessions (child flyouts, Back, history) are the `session` prop on `EuiFlyout`, not a component to import; `EuiProvider` already mounts the manager. The main flyout gets `session="start"` and a module-level `historyKey={Symbol()}`; a child rendered inside it gets `session="inherit"`. `flyoutMenuProps={{ title }}` names each one in Back and history. Plain flyouts: `session="never"`. Docs: `flyout/_session_management.mdx` and `flyout/manager/README.md` in the clone.
+- Managed flyout traps: a child's `size` must be named (`s`, `m`, `l`, `fill`), and a number throws. Main and child can't both be `m` or both `fill`, and `l` pairs only with `fill`. Switching `session` on a mounted flyout closes it, so change its `key` instead. Closing the main closes its children; `onClose(event, { reason })` says why (`close-button`, `escape`, `navigation-back`...), so sync the URL from it and don't close children yourself.
+- Icon names models remember that are gone: `arrowDown`/`Up`/`Left`/`Right` (use `chevronSingleDown` etc.), `popout` (`external`), `iInCircle` (`info`), `questionInCircle` (`question`), `plusInCircle` (`plusCircle`), `minusInCircle` (`minusCircle`), `boxesHorizontal` (`ellipsis`), `expand` (`maximize`). Deprecated names still render but avoid them: `search` (`magnify`), `alert` (`warning`), `boxesVertical` (`ellipsis`), `help` (`question`).
+- Theme tokens: `colors.textParagraph`, `textSubdued`, `textHeading`, `backgroundBasePlain`, `backgroundBaseSubdued`, `borderBasePlain`; radius `border.radius.control` or `panel`. Not `colors.text`, `colors.emptyShade`, `colors.link` or `border.radius.small`/`medium` (legacy or deprecated). Defaults changed: `EuiPanel` has a border and no shadow, `EuiText` is size `s`, `EuiLink` defaults to `color="text"`.
+- React 18 with StrictMode off: EUI supports React 17 and 18 only, and not StrictMode.
+- `EuiHealth` renders a `<div>`; inside a `<p>` or `EuiText` paragraph React warns about DOM nesting.
 
 ## Before you report
 
@@ -113,7 +128,6 @@ EUI and React
 - `app/emotionCache.ts` stops EUI from writing one `<style>` tag per rule (slow big mounts) and skips vendor pseudo-selectors Chromium can't parse.
 - `EuiBasicTable` widths in `%` log a warning on every render; use px or em. Its cells use tabular figures, which widen hyphens in Inter; show machine names in `EuiCode` or mono.
 - `useId()` returns ids like `:r8g:`; escape them before `querySelector`.
-- Props change between majors (`EuiListGroup` lost `gutterSize` and `flush` in 122).
 
 Router and Vite
 - TanStack Router re-serialises search values (numbers parsed, arrays as JSON, a bare `?freeze` becomes `?freeze=`). Read params through a parser that accepts both.

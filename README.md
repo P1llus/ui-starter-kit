@@ -18,7 +18,7 @@ Bring whatever you have: drop files in `input/`, point at them anywhere on disk,
 - Python 3.10+ through [uv](https://docs.astral.sh/uv/)
 - A Chromium: an existing Playwright or system Chrome is found automatically; otherwise the agent installs one into Playwright's cache (about 150 MB)
 - git
-- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 https://github.com/elastic/eui`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
+- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 --branch v122.1.0 https://github.com/elastic/eui`, the tag matching `ui/package.json`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
 - Disk for screenshots: a big build wrote about 1.5 GB to `work/sessions/` (gitignored, safe to delete afterwards)
 
 ## Running it
@@ -220,6 +220,7 @@ App, `ui/src/`:
 
 - Rules every agent follows: `.agents/skills/start-project/templates/AGENTS.md` (before a project) or `AGENTS.md` (in one).
 - What good UI means: `docs/ux/principles.md`, `docs/design/conventions.md`.
+- Component library rules and API traps (EUI names, removed props, side nav, flyout sessions, icons): `docs/tech/frontend.md`, section "EUI". Add a line there whenever agents keep getting an API wrong.
 - The review process: `work/briefs/qa.md`, `work/playbook/review-and-fix.md`, `docs/ux/review-checklist.md`.
 - Design direction and the boards: `.agents/skills/start-project/reference/step-2-design-boards.md`, `work/briefs/design-board.md`, `design/boards/_base.css`, `design/boards/_canvas-template.html`.
 - The questions asked up front: `.agents/skills/start-project/reference/questions.md`.

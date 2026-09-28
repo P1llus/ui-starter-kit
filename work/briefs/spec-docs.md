@@ -11,7 +11,7 @@ You write the spec for part of the prototype: page docs, component docs or featu
 5. `docs/ux/flyouts.md`: the flyout kind registry. You define the tabs and content of the flyouts your pages own.
 6. `docs/components/README.md`: shared component names. Use exactly these names. If you need a shared component that isn't listed, name it in your return message; don't invent one silently.
 7. `docs/pages/README.md`: the inventory, the decided "Not pages", and the page doc TEMPLATE.
-8. `docs/design/conventions.md` and `docs/decisions.md`.
+8. `docs/design/conventions.md` and `docs/decisions.md`. Component docs that name library components: also the EUI section of `docs/tech/frontend.md`.
 9. `docs/data/world.md`: the cast sheet and the demo stories. Facts and numbers come from here.
 10. What your task names: intake notes for your area (Summary and your boards), the approved boards in `design/png/` (look at them), research docs.
 

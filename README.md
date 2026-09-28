@@ -2,17 +2,33 @@
 
 Turn an idea into a clickable UI prototype, built by agents. You answer questions and approve the design; an orchestrator then runs many subagents that spec, build, screenshot, review and fix every page. The prototype runs on in-browser mock data that feels alive, and there is no backend.
 
-It comes from a real build: about 100 agents, 32 pages, two review rounds and a clean sweep of every route in about 20 hours ([case study](work/playbook/case-study.md)).
-
 ## Get started
 
 ```bash
 git clone <this repo> my-project && cd my-project
 rm -rf .git && git init -b main    # start clean; the skill offers this too
-claude                             # then type: /start-project
 ```
+Bring whatever you have: drop files in `input/`, point at them anywhere on disk, paste text or links into the chat when running the skill. Earlier design exports, notes, screenshots, API docs: all fine, none of it is treated as final.
 
-Bring whatever you have: drop files in `input/`, point at them anywhere on disk, paste text or links into the chat. Earlier design exports, notes, screenshots, API docs: all fine, none of it is treated as final.
+**The quality of the output is related to the quality of the input, features planned more extensively beforehand turns out much better compared to last-minute content**
+
+## Requirements (It will check and confirm after step 1 if you want it to set everything up)
+
+- Node 24+ and npm, via [nvm](https://github.com/nvm-sh/nvm) (`nvm install 24`; `ui/.nvmrc` says 24). fnm, volta, mise or a system Node 24 work too.
+- Python 3.10+ through [uv](https://docs.astral.sh/uv/)
+- A Chromium: an existing Playwright or system Chrome is found automatically; otherwise the agent installs one into Playwright's cache (about 150 MB)
+- git
+- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 https://github.com/elastic/eui`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
+- Disk for screenshots: a big build wrote about 1.5 GB to `work/sessions/` (gitignored, safe to delete afterwards)
+
+## Running it
+Assuming you have now provided the input you want, it could be figma exports, pdf's, txt files, claude design exports, api schemas, screenshots or other reference materials in the `input/` folder you start up claude with bypassPermissions `claude --permission-mode=bypassPermissions`. During the first step you can provide either the writeup about your project or link to the files and folders you have prepared for context. The minimal should be the full project description, step 2 will take you through the preparations and ask follow-up questions while step 3 is the long running loop as explained below.
+
+**Opus 5.5 xhigh or Fable 5.1 high recommended, subagents will use different models depending on task either way**
+
+```bash
+claude --permission-mode=bypassPermissions # Trigger the /start-project skill together with your initial description of the project or the location of the files/folders you have provided
+```
 
 What to expect:
 
@@ -30,15 +46,6 @@ What to expect:
 | Fable 5.1 (rare) | A task that has to hold the whole app in mind or already failed twice on Opus: the cross-page consistency review of a large app, redesigning a page that keeps failing its question, a deep mock-world bug |
 
 If a usage limit stops the build, tell the session "continue"; if the session is gone, start a new one with "Read ORCHESTRATOR.md and continue".
-
-## Requirements
-
-- Node 24+ and npm, via [nvm](https://github.com/nvm-sh/nvm) (`nvm install 24`; `ui/.nvmrc` says 24). fnm, volta, mise or a system Node 24 work too.
-- Python 3.10+ through [uv](https://docs.astral.sh/uv/)
-- A Chromium: an existing Playwright or system Chrome is found automatically; otherwise the agent installs one into Playwright's cache (about 150 MB)
-- git
-- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 https://github.com/elastic/eui`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
-- Disk for screenshots: a big build wrote about 1.5 GB to `work/sessions/` (gitignored, safe to delete afterwards)
 
 Step 1 runs `scratch/doctor.py`, installs project-local packages itself, and asks before anything system-wide.
 
@@ -226,3 +233,8 @@ App, `ui/src/`:
 ```
 
 In a second terminal: `(cd scratch && uv sync && uv run python shoot.py --base http://localhost:5173 --out /tmp/shots --flows flows.example.json)`. Dev pages: `/dev`, `/dev/smoke`, `/dev/mock`, `/dev/components`.
+
+
+### Stats from last successful usage of the template:
+
+From about 100 agents, 32 pages, two review rounds and a clean sweep of every route in about 20 hours ([case study](work/playbook/case-study.md)).

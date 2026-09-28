@@ -54,6 +54,7 @@ body {
   margin: 0 0 12px;
   max-width: 1440px;
   font-size: 13px;
+  line-height: 20px; /* whole pixels, or later boards render 1px tall */
   color: #c9d1de;
 }
 

@@ -59,7 +59,7 @@ Your review, after each agent returns:
 2. Explain in a few lines what each canvas decides, and repeat that the pages are samples.
 3. Ask specific questions rather than "do you like it": density, colour use, navigation, the flyout frame and its width, the table style, the page template, dark mode. AskUserQuestion with multiSelect works well for "which of these need changes?".
 4. Change what they ask, rerender, show again. Several rounds are normal. Record each round's feedback in the ORCHESTRATOR.md Log.
-5. When the user approves, record it: a decision row ("Design boards approved at commit <hash>: <list>"), a Log line, a commit.
+5. When the user approves, commit the boards ("Design boards approved"), then record that commit's hash: a decision row ("Design boards approved at commit <hash>: <list>"), a Log line, a second commit.
 
 After approval the boards are the reference for the look and the patterns. Details the component library does differently are fine; patterns, density, colour use and structure must match. In step 3 the spec phase distills the boards into `docs/design/` and the component docs, and builders work from those docs.
 

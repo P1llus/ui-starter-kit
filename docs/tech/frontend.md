@@ -15,7 +15,7 @@ The app lives in `ui/`: a Vite single-page app on in-browser mock data, no backe
 | @fontsource/inter, @fontsource/roboto-mono | 5.x | Borealis fonts, bundled, no CDN |
 | eslint, typescript-eslint, prettier | 10.x, 8.x, 3.x | Lint rules below |
 
-Node 24+ (`ui/.nvmrc`), installed with nvm: `nvm install 24 && nvm use 24`. Add libraries when the spec needs them and record them here.
+Node 24+ (`ui/.nvmrc`), installed with nvm: `nvm install 24 && nvm alias default 24` (in an agent's shell, `source "$NVM_DIR/nvm.sh"` first). Add libraries when the spec needs them and record them here.
 
 ## Commands
 
@@ -37,7 +37,7 @@ ui/src/
   main.tsx          fonts, global CSS, starts the mock world and the dev hooks, renders <App/>
   app/              App (EuiProvider + router), router, RootLayout, shell/, flyouts.ts (kind registry), devHooks.ts
   routes/           file routes, thin: the route, its search validation, the page component
-  features/<area>/  pages/<Name>Page.tsx, flyouts/<Kind>Flyout.tsx, components/ used only by this area
+  features/<area>/  pages/<Name>Page.tsx, flyouts/<Kind>Flyout.tsx, forms/<Kind>Form.tsx, components/ used only by this area
   features/dev/     /dev pages; mock/*.tsx and components/*.tsx are gallery sections, collected automatically
   components/       shared components, each documented in docs/components/
   lib/              router/ (search validation), url/ (URL state), format/ (the only formatters)

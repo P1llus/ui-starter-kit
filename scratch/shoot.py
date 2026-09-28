@@ -81,6 +81,13 @@ def load_jobs(args) -> list[Job]:
             if not any("shot" in s for s in steps):
                 steps.append({"shot": name})
             jobs.append(Job(name, entry.get("route", "/"), steps))
+    # `?sort=x` and `?sort=-x` slug the same; number repeats so neither shot overwrites the other.
+    seen: dict[str, int] = {}
+    for job in jobs:
+        n = seen[job.name] = seen.get(job.name, 0) + 1
+        if n > 1:
+            job.steps = [{**s, "shot": f"{s['shot']}-{n}"} if s.get("shot") == job.name else s for s in job.steps]
+            job.name = f"{job.name}-{n}"
     return jobs
 
 

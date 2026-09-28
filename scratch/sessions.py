@@ -92,7 +92,7 @@ def agent_rows(root: Path, session: Path) -> list[dict]:
         meta = json.loads(meta_path.read_text())
         jl = meta_path.with_name(meta_path.name.replace(".meta.json", ".jsonl"))
         first = last = None
-        final, prompt, tools, png, shots, spawned, stops, last_error = "", "", 0, 0, 0, 0, 0, False
+        final, prompt, tools, png, shots, spawned, stops, last_error, working = "", "", 0, 0, 0, 0, 0, False, False
         for e in events(jl):
             ts = e.get("timestamp")
             if ts:
@@ -106,8 +106,10 @@ def agent_rows(root: Path, session: Path) -> list[dict]:
                     if part.get("type") == "text" and part["text"].strip():
                         final = part["text"].strip()
                         last_error = bool(e.get("isApiErrorMessage"))
+                        working = False
                     elif part.get("type") == "tool_use":
                         tools += 1
+                        working = True  # text before a tool call is an interim line, not the result
                         inp = part.get("input", {})
                         if part["name"] == "Read" and str(inp.get("file_path", "")).endswith(".png"):
                             png += 1
@@ -116,7 +118,7 @@ def agent_rows(root: Path, session: Path) -> list[dict]:
                         if part["name"] in ("Agent", "Task"):
                             spawned += 1
         cut = last_error or bool(LIMIT_RE.search(final[-300:]) and len(final) < 300)
-        status = "cut off" if cut else ("done" if final else "no result")
+        status = "cut off" if cut else ("done" if final and not working else "running or stopped" if tools else "no result")
         rows.append({
             "id": jl.stem.replace("agent-", ""), "desc": meta.get("description", ""), "type": meta.get("agentType", ""),
             "parent": (meta.get("parentAgentId") or "")[:8], "depth": meta.get("spawnDepth", 1),

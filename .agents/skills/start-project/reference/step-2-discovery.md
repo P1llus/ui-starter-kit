@@ -26,7 +26,7 @@ Write these files. Skeletons for some are in [templates/docs/](../templates/docs
 | --- | --- |
 | `docs/product/brief.md` | The project description: what it is, who uses it, jobs ranked, what the prototype proves, areas, principles specific to this product, systems it shows data from, what moves live, out of scope, things the user does not want, open for review. This is the "big writeup"; everything else links to it. |
 | `docs/product/glossary.md` | The nouns and verbs the UI uses, one line each, and words to avoid. |
-| `docs/pages/README.md` | The page inventory: area, page, the one question it answers, template, priority. Plus a "Not pages (decided)" table for ideas that became a tab, a flyout or nothing. This list is the scope of the build. Skeleton: [pages-README.md](../templates/docs/pages-README.md). |
+| `docs/pages/README.md` | The page inventory: area, page, the one question it answers, template. Plus a "Not pages (decided)" table for ideas that became a tab, a flyout or nothing. This list is the scope of the build. Skeleton: [pages-README.md](../templates/docs/pages-README.md). |
 | `docs/components/README.md` | The shared component inventory with exact names and one line each: shell, page header, tables, filter bar, status badge set, flyout frame, forms, empty states, charts, editors. Names used here are the names used in code. Skeleton: [components-README.md](../templates/docs/components-README.md). |
 | `docs/ux/navigation.md` | The nav tree, routes, which things are tabs, which open as flyouts, URL parameters. |
 | `docs/ux/interactions.md` | The key interactions: what creates, edits, deletes or runs things, what confirms first, what runs only on request. It links to the demo stories in `world.md` instead of repeating them. |

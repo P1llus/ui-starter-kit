@@ -57,9 +57,8 @@ ACTIONS = [
 
 
 def sel(selector: str) -> str:
-    """`@save` -> `[data-test-subj="save"]`; the rest of a chained selector is kept."""
-    m = re.match(r"^@([\w.:\-]+)(.*)$", selector.strip())
-    return f'[data-test-subj="{m.group(1)}"]{m.group(2)}' if m else selector
+    """`@save` -> `[data-test-subj="save"]`, anywhere a token starts (`@row >> @menu`, `@a @b`)."""
+    return re.sub(r'(^|[\s>+~(,])@([\w.:\-]+)', lambda m: f'{m.group(1)}[data-test-subj="{m.group(2)}"]', selector.strip())
 
 
 def build_url(base: str, route: str, theme: str | None = None, freeze: str | None = None) -> str:
@@ -337,11 +336,14 @@ class Flow:
                 target = self.loc(step["selector"])
                 pad = int(step.get("pad", 0))
                 if pad:
+                    target.scroll_into_view_if_needed()
                     box = target.bounding_box()
                     if not box:
                         raise RuntimeError(f"{step['selector']} has no box (hidden?)")
+                    # The box is in viewport coordinates; a full-page clip takes document coordinates.
+                    sx, sy = page.evaluate("() => [window.scrollX, window.scrollY]")
                     page.screenshot(path=str(path), full_page=True, clip={
-                        "x": max(0, box["x"] - pad), "y": max(0, box["y"] - pad),
+                        "x": max(0, box["x"] + sx - pad), "y": max(0, box["y"] + sy - pad),
                         "width": box["width"] + 2 * pad, "height": box["height"] + 2 * pad,
                     })
                 else:
@@ -349,8 +351,10 @@ class Flow:
             else:
                 page.screenshot(path=str(path), full_page=bool(step.get("full")))
             files = tile_if_tall(path)
+            # A flipped theme doesn't change the URL; record the one that reproduces this shot.
+            url = re.sub(r"theme=(light|dark)", f"theme={'dark' if dark else 'light'}", page.url)
             for f in files:
-                self.shots.append({"file": str(f), "url": page.url, "flow": self.name, "dark": dark})
+                self.shots.append({"file": str(f), "url": url, "flow": self.name, "dark": dark})
                 self.say(f"  saved {f}")
         if flipped:
             self._set_theme(self.theme or "light")

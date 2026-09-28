@@ -29,11 +29,11 @@ function sameDay(a: number, b: number): boolean {
   return new Date(a).toDateString() === new Date(b).toDateString();
 }
 
-/** "25 Sep", or "25 Sep 2025" when not this year. */
+/** "25 Sep", or "25 Sep 2025" when not this year. en-GB in current ICU says "Sept"; the conventions say "Sep". */
 export function formatDate(t: number, now: number): string {
-  return new Date(t).getFullYear() === new Date(now).getFullYear()
-    ? dayMonth.format(t)
-    : dayMonthYear.format(t);
+  const text =
+    new Date(t).getFullYear() === new Date(now).getFullYear() ? dayMonth.format(t) : dayMonthYear.format(t);
+  return text.replace('Sept', 'Sep');
 }
 
 /** "just now", "12 s ago", "3 min ago", "2 h ago", "yesterday", "4 days ago", then the date. */

@@ -43,12 +43,12 @@ def version_tuple(text: str) -> tuple[int, ...]:
 def check_node() -> None:
     v = run(["node", "--version"], cwd=UI)
     if not v:
-        add("MISSING", "node", "not found", "nvm install 24 && nvm use 24 (or Node 24+ from fnm, volta, mise, proto or the system)")
+        add("MISSING", "node", "not found", 'source "$NVM_DIR/nvm.sh" && nvm install 24 && nvm alias default 24 (or Node 24+ from fnm, volta, mise, proto or the system)')
         return
     t = version_tuple(v)
     ok = t >= (24, 0, 0)
     add("OK" if ok else "MISSING", "node", f"{v} ({shutil.which('node')})",
-        "" if ok else "the kit needs Node 24+ (ui/.nvmrc): nvm install 24 && nvm use 24")
+        "" if ok else 'the kit needs Node 24+ (ui/.nvmrc): source "$NVM_DIR/nvm.sh" && nvm install 24 && nvm alias default 24')
     managers = [m for m in ("nvm", "fnm", "volta", "mise", "asdf", "proto") if shutil.which(m) or (Path.home() / f".{m}").exists()]
     add("OK", "node managers seen", ", ".join(managers) or "none",
         "if `which node` is another manager's shim, make sure it resolves to Node 24+ too" if len(managers) > 1 else "")

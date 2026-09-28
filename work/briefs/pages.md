@@ -5,7 +5,7 @@ Read `work/briefs/build.md` first; everything there applies. This adds the page-
 ## What exists
 
 - The shell and routes: every route in `docs/ux/navigation.md` has a thin route file and a placeholder `ui/src/features/<area>/pages/<Name>Page.tsx`. You replace the placeholders you own. Don't edit route files unless your page needs search-param validation (use the helpers in `ui/src/lib/router`).
-- Flyouts: every kind has a placeholder at `ui/src/features/<area>/flyouts/<Kind>Flyout.tsx`, already registered in `ui/src/app/flyouts.ts`. Replace the ones you own and keep the props contract in `docs/components/flyout.md`.
+- Flyouts: every kind has a placeholder at `ui/src/features/<area>/flyouts/<Kind>Flyout.tsx`, already registered in `ui/src/app/flyouts.ts`. Replace the ones you own and keep the props contract in `docs/components/flyout.md`. Form kinds (`?form=`) work the same way, at `ui/src/features/<area>/forms/<Kind>Form.tsx`.
 - Shared components in `ui/src/components/**`, shown on `/dev/components`. The mock world through `@/mock`, shown on `/dev/mock`; its usage doc is `docs/data/README.md`.
 
 ## Rules

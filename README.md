@@ -1,6 +1,8 @@
 # UI starter kit
 
-Turn an idea into a clickable UI prototype, built by agents. You answer questions and approve the design; an orchestrator then runs many subagents that spec, build, screenshot, review and fix every page. The prototype runs on in-browser mock data that feels alive, and there is no backend.
+Turn an idea into a clickable UI prototype at larger scale, built by agents and not require any assortment of MCP's, skills or other content.
+
+You answer questions and approve the design; an orchestrator then runs many subagents that spec, build, screenshot, review and fix every page. The prototype runs on in-browser mock data that feels alive, and there is no backend implementation included as its for UI mocks on purpose.
 
 ## Get started
 

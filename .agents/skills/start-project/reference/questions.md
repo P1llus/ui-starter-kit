@@ -18,6 +18,7 @@ Product
 - What is it, in two sentences? Who uses it, and what do they come to do?
 - Is there a product this prototype will become, or is it a research piece? What should the prototype prove?
 - Name the three to six jobs users do most. Which one matters most?
+- How much should it do for them, and how much should it expose? Some audiences want simple screens, automation and good defaults; others expect an expert tool with many settings, filters and options. It can differ per area.
 
 Scope
 - Which areas or pages do you already know? Which ones are you unsure about?
@@ -70,6 +71,7 @@ Look
 Move from asking to writing the brief when you can fill every line with an answer or a recorded decision. Move from the brief to design boards only when the user confirmed the brief and the inventories.
 
 - [ ] Product in two sentences, the users, and the jobs ranked.
+- [ ] Audience and complexity: simple and automated, or expert and configurable, per area where it differs.
 - [ ] What the prototype must prove, and what "done" looks like to the user.
 - [ ] Page inventory: every page with its one question and its template (list, detail, dashboard, editor, settings, standalone), and the pages explicitly left out.
 - [ ] Navigation: top-level areas, nesting, what is a tab vs a page vs a flyout.

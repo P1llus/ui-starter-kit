@@ -4,6 +4,8 @@ Goal: the user approves how the product looks and how its main patterns work, be
 
 The boards are samples, not the whole product. Say that to the user up front: "These set the style and the patterns. They are not every page."
 
+Draw the product as it should look. The build styles and composes library components to match the boards, so don't hold them to the library's defaults, or to what the kit's scaffolding in `ui/` happens to have.
+
 ## Why canvases, and why split
 
 Earlier design rounds that drew whole pages one by one drifted: each page invented its own badges, headers and flyout sizes, and some agents kept inventing pages without end. So the boards here are split by topic, all use the same tokens (`design/tokens.css`, exported from the real theme) and one shared stylesheet of primitives (`design/boards/_kit.css`), and each canvas is small enough for one agent to finish and check.

@@ -12,6 +12,7 @@ Rules:
 - Blockers first. Where a reviewer found the root cause, start there, but confirm it: a stated cause can be wrong.
 - A finding you disagree with: don't silently skip it. Fix it, or change the doc so doc and UI agree, and say why in your return message. A ruling you disagree with: apply it anyway and say why.
 - A finding outside your area that you notice: list it in your return; don't fix it.
+- A style override you would copy from another page, or one that fights the theme: don't add another copy. List it in your return for the shared fixer (a shared component or `ui/src/theme/`).
 - Keep the page docs true for what you change.
 - The frozen build on port 5300 is for reviewers; never touch that process. It may be older than the tree: check the running dev server before fixing something marked "Not fixed".
 - Verify every fix with a screenshot or a flow (`expect` the result), light and dark where visual. Before/after: `shoot.py --compare <before dir>`.

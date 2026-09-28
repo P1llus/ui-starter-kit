@@ -34,8 +34,9 @@ What to expect:
 
 1. **Setup** (`/start-project`). The agent checks your machine and lists anything missing with the exact commands; you run them or tell it to. It collects and reads your material, asks the first questions and starts research. Then it asks you to open a fresh session.
 2. **Discovery and design** ("Read ORCHESTRATOR.md and follow it"). A longer conversation. It writes the project brief, page list and demo stories for you to confirm, then has design boards drawn (layout, components, overlays, a few sample pages) and iterates until you approve. Then it writes the build plan and asks for a fresh session.
-3. **Build** ("Read ORCHESTRATOR.md and start the build loop"). The orchestrator works alone for hours: specs, foundation, pages, two review rounds, fixes, polish. It won't ask you anything. Watch `ORCHESTRATOR.md` and `git log`, or run `(cd scratch && uv run python sessions.py agents)`.
-4. **Wrap-up.** It leaves a maintenance-mode `ORCHESTRATOR.md` and tells you which working folders you can delete.
+3. **Build** ("Read ORCHESTRATOR.md and start the build loop"). The orchestrator works alone for hours: specs, foundation, pages, two review rounds, fixes, polish. It won't ask you anything. Watch `ORCHESTRATOR.md` and `git log`, or run `(cd scratch && uv run python sessions.py agents)`. It works best when you let it run to the end. If you have feedback, give it all at once, and say whether it's a one-off or a rule for everything; a rule goes into the docs and applies to pages built later.
+4. **Wrap-up.** It leaves a maintenance-mode `ORCHESTRATOR.md` and tells you which working folders you can delete. For more work afterwards, say "Read ORCHESTRATOR.md, then <your request>"; a small request gets a small process, not another full build loop.
+5. **If it stops** (usage limit, crash, closed terminal), in any step: tell the same session "continue". If the session is gone, start a new one in the folder with "Read ORCHESTRATOR.md and continue". Step 1 writes `ORCHESTRATOR.md` near its end; if it stopped before that, run `/start-project` again.
 
 **Models.** Run steps 1 to 3 on at least **Opus 5.5 at xhigh effort** (what the reference run used). **Fable 5.1 at high effort** also works for the main sessions; it costs more and suits a large or unusual product. The orchestrator picks models for its subagents itself:
 
@@ -44,8 +45,6 @@ What to expect:
 | Opus 5.5 (default) | Anything that judges UI or writes code across files: spec writers, builders, fixers, reviewers, story walkers |
 | Sonnet 5 | Mechanical work with a clear rule and a small context: link fixes, doc syncs against code, a helper migration spelled out file by file, error sweeps that only report, research summaries |
 | Fable 5.1 (rare) | A task that has to hold the whole app in mind or already failed twice on Opus: the cross-page consistency review of a large app, redesigning a page that keeps failing its question, a deep mock-world bug |
-
-If a usage limit stops the build, tell the session "continue"; if the session is gone, start a new one with "Read ORCHESTRATOR.md and continue".
 
 Step 1 runs `scratch/doctor.py`, installs project-local packages itself, and asks before anything system-wide.
 

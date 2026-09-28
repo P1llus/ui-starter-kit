@@ -1,6 +1,6 @@
 # UX principles
 
-These rules apply to every page, flyout and form. When a design and a rule disagree, the rule wins unless [decisions.md](../decisions.md) records an exception.
+These rules apply to every page, flyout and form. When a design and a rule disagree, the rule wins unless [decisions.md](../decisions.md) records an exception. The rules trim noise, not capability: the brief says how much depth this audience expects, and a settings page an expert needs keeps its settings.
 
 <!-- Starter set from the UI starter kit. Step 2 adapts the examples to the product; keep the rules unless the user decided otherwise. -->
 

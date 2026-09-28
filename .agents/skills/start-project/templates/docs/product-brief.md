@@ -12,6 +12,8 @@
 | --- | --- |
 | <persona> | <job>, <job> |
 
+<How much they expect to configure: simple and automated, or an expert tool with many settings. Per area if it differs. Calm UI trims noise, not the depth this audience expects.>
+
 ## What this prototype proves
 
 <What the user wants to learn or show with it. What "done" looks like to them.>

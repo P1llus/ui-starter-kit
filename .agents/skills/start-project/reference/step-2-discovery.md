@@ -15,6 +15,7 @@ Work through round 2 of [questions.md](questions.md), area by area. Ask for more
 Rules:
 - Don't move on while an important question is open. If the user can't answer, propose an answer, record it as a decision, and list it under "Open for review" in the brief.
 - Push back when a wish conflicts with calm UI or with another answer. Say what the conflict is and propose a resolution.
+- Thin material: don't stop at open questions. Offer options and examples the user can pick from or correct: a likely page list for an area, what a typical page of this kind shows, two ways a flow could work. By the end, every area and page is named with its question, even where the detail is still thin. Step 3 fills in detail, not scope.
 - Watch scope. A prototype with 15 good pages beats one with 40 thin ones. If the list keeps growing, ask the user to rank and cut, and record what was cut.
 - Research gaps: start a research agent pointed at [work/briefs/research.md](../../../../work/briefs/research.md) and keep talking while it runs.
 

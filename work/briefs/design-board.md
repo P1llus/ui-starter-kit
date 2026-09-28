@@ -17,7 +17,7 @@ You draw one or more static HTML canvases that show how the product looks and ho
 - Shared primitives (buttons, badges, inputs, tables, flyout frame) live in `_kit.css`. Only its owner edits it; others propose additions in their return message and keep canvas-only styles in their file's `<style>`.
 - Calm UI: every page answers one question with its first screen; one primary action per view; one status element per table row and at most two badges per header; no KPI tile rows that repeat a table; overlays don't crush the page; no backend words in copy.
 - Real-sounding content from the cast sheet. No lorem ipsum, no "Item 1".
-- Draw what the component library can build. If a board needs something the library lacks, say so in the board note.
+- Draw a UI that looks good, not the library's defaults. Builders style and compose library components to match the boards, so plain default tables and panels are not the target. If a board needs something the library can't do at all (a node graph, a map), say so in the board note.
 - Each board has a caption and a one-line note saying what it decides.
 
 ## Verify

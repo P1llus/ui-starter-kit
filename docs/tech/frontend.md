@@ -108,6 +108,7 @@ Memory is usually several majors behind the installed version (122 when the kit 
 - Theme tokens: `colors.textParagraph`, `textSubdued`, `textHeading`, `backgroundBasePlain`, `backgroundBaseSubdued`, `borderBasePlain`; radius `border.radius.control` or `panel`. Not `colors.text`, `colors.emptyShade`, `colors.link` or `border.radius.small`/`medium` (legacy or deprecated). Defaults changed: `EuiPanel` has a border and no shadow, `EuiText` is size `s`, `EuiLink` defaults to `color="text"`.
 - React 18 with StrictMode off: EUI supports React 17 and 18 only, and not StrictMode.
 - `EuiHealth` renders a `<div>`; inside a `<p>` or `EuiText` paragraph React warns about DOM nesting.
+- Defaults look plain next to the boards. `EuiBasicTable` and `EuiInMemoryTable` take a `render` per column and the `css` prop; `EuiDataGrid` takes `renderCellValue` and a custom toolbar. Style and compose until a page matches its board. Styling every page needs goes into a shared component, or into the theme when `docs/design/tokens.md` records why.
 
 ## Before you report
 

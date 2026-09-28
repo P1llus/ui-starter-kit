@@ -62,4 +62,4 @@ Keep `work/intake/notes/` only if the intent audit may run again; say so.
 
 1. Commit ("Finish the prototype: final sweep, docs audit, maintenance ORCHESTRATOR"). Push if allowed.
 2. Save memory notes if your environment has a memory system: the user's standing preferences for this project and anything that surprised you.
-3. Report to the user, briefly: what was built (pages, demo stories that walk end to end), how it was checked (rounds, sweep counts), how to run it and what to try first (the README's demo stories), what they can delete, and how to start the next wave ("Read ORCHESTRATOR.md, then <their request>").
+3. Report to the user, briefly: what was built (pages, demo stories that walk end to end), a few stats (pages, flyouts, shared components, lines of code in `ui/src`, agents run and hours from `sessions.py agents`), how it was checked (rounds, sweep counts), how to run it and what to try first (the README's demo stories), what they can delete, and how to ask for more ("Read ORCHESTRATOR.md, then <their request>"; small requests get a small process).

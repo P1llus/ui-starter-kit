@@ -10,13 +10,15 @@ Read this before doing anything in this repo. It applies to every agent, includi
 
 **This repo is a frontend prototype**: every page in React + <component library>, running on an in-browser mock world. There is no backend. Reloading the page or restarting the dev server resets all data to the same starting point.
 
+The code the kit shipped in `ui/` (shell, sample page, flyout host, sample mock domain) is scaffolding, not a design. Replace any of it. Keep only the contracts the tools rely on: view state in the URL, `?theme` and `?freeze`, the dev hooks, `data-test-subj`, and `@/mock` as the only way into the mock world. What the scaffolding lacks (a collapsible side nav, flyout sessions, a form host) never limits what the design or a spec asks for. Where the library works differently from a board, adapt the design a little and record the decision; don't drop the feature.
+
 Product background: `docs/product/brief.md`. Doc map: `docs/README.md`. Orchestration state: `ORCHESTRATOR.md` (the orchestrator's playbook is `work/playbook/`; subagents don't need it). Task briefs: `work/briefs/`.
 
 ## Hard rules
 
 1. **No backend work.** No server code, no API design, no request or response schemas, no debates about whether a real service could support a UI idea. Mock data lives in `ui/src/mock/` and does whatever the UI needs. If a UI idea needs data, invent the data.
 2. **The docs are the spec.** `docs/` records what each page is for and how it behaves. The approved design boards in `design/` set the look and the patterns. When the UI and a doc disagree, fix whichever is wrong in the same change.
-3. **Calm UI over data dumps.** Every page answers one question first. Follow `docs/ux/principles.md` (badge budget, one primary action, progressive disclosure, expensive work on request). If a screen shows more than a person can scan in five seconds, cut it or move it into a tab or flyout.
+3. **Calm UI over data dumps.** Every page answers one question first. Follow `docs/ux/principles.md` (badge budget, one primary action, progressive disclosure, expensive work on request). If a screen shows more than a person can scan in five seconds, cut it or move it into a tab or flyout. Calm cuts noise, not capability: the settings, filters and options this audience expects (the brief says how much) stay.
 4. **Reuse before you build.** Check `docs/components/` and `ui/src/components/` first. A new shared component needs a doc in `docs/components/`.
 5. **Scope is the page inventory.** `docs/pages/README.md` lists every page. Don't add pages; propose them in your return message.
 6. **Stay in your lane.** Only edit files your task assigns you. If a shared file needs a change, make the smallest compatible change and list it in your report. Never reformat files you don't own.
@@ -41,7 +43,7 @@ Local clones: grep them instead of searching the web. Don't use MCP servers or r
 - `sessions.py`: maps the Claude Code sessions of this repo (orchestrator timeline, every subagent and its result).
 - `scratch/routes.txt`: every route, tab and one flyout per kind, for sweeps. Keep it current.
 
-The tools are a starting point, not a rule. If one has a bug or lacks something you needed more than once, add `Tool bug: ...` or `Tool request: ...` to your return message; the orchestrator improves the tools. For a one-off need, write a small script in `work/sessions/<task-id>/`.
+The tools are a starting point, not a rule. If one has a bug or lacks something you needed more than once, add `Tool bug: ...` or `Tool request: ...` to your return message, one or two sentences; the orchestrator improves the tools. Report it too when you copied a kit script to change it, or wrote your own version of something a tool should cover. For a one-off need, write a small script in `work/sessions/<task-id>/`. Never skip or bend a planned feature, page or check because a tool can't handle it: work around the tool and report it.
 
 ## Code rules (short)
 

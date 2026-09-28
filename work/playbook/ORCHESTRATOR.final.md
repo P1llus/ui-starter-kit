@@ -32,6 +32,16 @@ Things the user explicitly does not want:
 
 The briefs used for each kind of task are in `work/briefs/` (tracked). Reuse them for new waves.
 
+## Size the work to the request
+
+The build loop is finished. Its playbook (`work/playbook/build-loop.md`, `review-and-fix.md`) is for large waves, not for every follow-up. Read this file and `AGENTS.md`, then only the docs the request touches; don't reread every doc at the start of each session.
+
+| Request | Process |
+| --- | --- |
+| A nit or a small fix | Do it yourself or with one agent, check it with a screenshot, commit. No review round. |
+| A new page, tab or flyout | Its doc first, one builder, one area review and one fix round; add it to `scratch/routes.txt`. |
+| A new area, a redesign, or many pages | A new wave, as below. |
+
 ## Running a new wave
 
 1. Decide the scope and write it into the docs first: a page doc, a component doc, a decision row.

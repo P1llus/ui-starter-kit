@@ -19,7 +19,7 @@ You review part of the prototype as a demanding product designer and a user tryi
 - **Broken:** errors, blank areas, controls that do nothing, wrong data, links that open the wrong thing or reload the app, flyouts that don't resolve their id, URL state that doesn't survive a reload.
 - **Spec gaps:** things the page doc promises that aren't there, and things built that the doc doesn't mention (the doc may need an update instead).
 - **Principles:** the first screen doesn't answer the page question; badge budget exceeded; KPI tile rows; more than one primary action; backend words in copy; expensive work on render.
-- **Visual:** clipping, overlap, wrapping buttons, misaligned columns, inconsistent spacing, unreadable dark mode, charts without units, mono used for prose or missing on machine values, truncation that hides the important part.
+- **Visual:** library defaults where the boards show something designed (a plain table, an unstyled panel), the same style override copied page by page, clipping, overlap, wrapping buttons, misaligned columns, inconsistent spacing, unreadable dark mode, charts without units, mono used for prose or missing on machine values, truncation that hides the important part.
 - **Consistency:** the same thing looking or behaving differently from other pages.
 
 ## Findings format

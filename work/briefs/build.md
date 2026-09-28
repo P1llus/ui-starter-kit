@@ -14,6 +14,7 @@ You implement part of the prototype in `ui/` (<stack: React 18, TypeScript stric
 ## Code rules
 
 - Library components first (check props in the installed version: <where to grep>). Wrap them only where the component docs say so.
+- Match the boards, not the library's defaults. Default tables and panels look plain next to the boards: style and compose library components with tokens until they match, and use the richer variants (custom column `render`, in-memory tables, data grids with custom cells) where the board needs them. Styling you repeat from another page, or an override of a library default that every page would need, belongs in a shared component or the theme: name it in your return instead of copying it.
 - Colours, spacing and fonts from theme tokens. No hex literals; no magic pixel values except documented widths.
 - Styling with the `css` prop. No new global CSS unless the task says so.
 - Shared components from `@/components/...`; mock data only through `@/mock`.
@@ -38,4 +39,4 @@ Only edit files your task lists. If a shared file needs a change (a shared compo
 
 Screenshots go in `work/sessions/<task-id>/`. Return under 200 words: what you built, files touched outside your ownership, known gaps, disagreements with the docs, the screenshot folder.
 
-Tools: `scratch/` and the helpers in `ui/src/lib/` are a starting point. If one has a bug, or lacks something you needed more than once, add a line to your return: `Tool bug: ...` or `Tool request: ...`. For a one-off need, write a small script in `work/sessions/<task-id>/` instead.
+Tools: `scratch/` and the helpers in `ui/src/lib/` are a starting point. If one has a bug, or lacks something you needed more than once, add a line to your return: `Tool bug: ...` or `Tool request: ...`. Copying a kit script to change it counts. For a one-off need, write a small script in `work/sessions/<task-id>/` instead. A tool that can't do something is never a reason to leave out what your task asks for.

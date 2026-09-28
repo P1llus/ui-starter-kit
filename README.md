@@ -12,17 +12,9 @@ Bring whatever you have: drop files in `input/`, point at them anywhere on disk,
 
 **The quality of the output is related to the quality of the input, features planned more extensively beforehand turns out much better compared to last-minute content**
 
-## Requirements (It will check and confirm after step 1 if you want it to set everything up)
-
-- Node 24+ and npm, via [nvm](https://github.com/nvm-sh/nvm) (`nvm install 24`; `ui/.nvmrc` says 24). fnm, volta, mise or a system Node 24 work too.
-- Python 3.10+ through [uv](https://docs.astral.sh/uv/)
-- A Chromium: an existing Playwright or system Chrome is found automatically; otherwise the agent installs one into Playwright's cache (about 150 MB)
-- git
-- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 --branch v122.1.0 https://github.com/elastic/eui`, the tag matching `ui/package.json`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
-- Disk for screenshots: a big build wrote about 1.5 GB to `work/sessions/` (gitignored, safe to delete afterwards)
-
 ## Running it
-Assuming you have now provided the input you want, it could be figma exports, pdf's, txt files, claude design exports, api schemas, screenshots or other reference materials in the `input/` folder you start up claude with bypassPermissions `claude --permission-mode=bypassPermissions`. During the first step you can provide either the writeup about your project or link to the files and folders you have prepared for context. The minimal should be the full project description, step 2 will take you through the preparations and ask follow-up questions while step 3 is the long running loop as explained below.
+Assuming you have now provided the input you want, it could be figma exports, pdf's, txt files, claude design exports, api schemas, screenshots or other reference materials in the `input/` folder you start up claude with bypassPermissions. 
+During the first step you can provide either the writeup about your project or link to the files and folders you have prepared for context. The minimal should be the full project description, step 2 will take you through the preparations and ask follow-up questions while step 3 is the long running loop as explained below.
 
 **Opus 5.5 xhigh or Fable 5.1 high recommended, subagents will use different models depending on task either way**
 
@@ -38,6 +30,21 @@ What to expect:
 4. **Wrap-up.** It leaves a maintenance-mode `ORCHESTRATOR.md` and tells you which working folders you can delete. For more work afterwards, say "Read ORCHESTRATOR.md, then <your request>"; a small request gets a small process, not another full build loop.
 5. **If it stops** (usage limit, crash, closed terminal), in any step: tell the same session "continue". If the session is gone, start a new one in the folder with "Read ORCHESTRATOR.md and continue". Step 1 writes `ORCHESTRATOR.md` near its end; if it stopped before that, run `/start-project` again.
 
+## Requirements (It will check and confirm after step 1 if you want it to set everything up)
+
+- Node 24+ and npm, via [nvm](https://github.com/nvm-sh/nvm) (`nvm install 24`; `ui/.nvmrc` says 24). fnm, volta, mise or a system Node 24 work too.
+- Python 3.10+ through [uv](https://docs.astral.sh/uv/)
+- A Chromium: an existing Playwright or system Chrome is found automatically; otherwise the agent installs one into Playwright's cache (about 150 MB)
+- git
+- Recommended: a local clone of [EUI](https://github.com/elastic/eui) (`git clone --depth 1 --branch v122.1.0 https://github.com/elastic/eui`, the tag matching `ui/package.json`). Agents grep it for components and docs, which is much faster than web search, MCP servers or remote docs. Step 1 asks where it is.
+- Disk for screenshots: a big build wrote about 1.5 GB to `work/sessions/` (gitignored, safe to delete afterwards)
+
+## How it works
+
+Optional reading, for when you want to change something.
+
+### Models used
+
 **Models.** Run steps 1 to 3 on at least **Opus 5.5 at xhigh effort** (what the reference run used). **Fable 5.1 at high effort** also works for the main sessions; it costs more and suits a large or unusual product. The orchestrator picks models for its subagents itself:
 
 | Subagent model | For |
@@ -47,10 +54,6 @@ What to expect:
 | Fable 5.1 (rare) | A task that has to hold the whole app in mind or already failed twice on Opus: the cross-page consistency review of a large app, redesigning a page that keeps failing its question, a deep mock-world bug |
 
 Step 1 runs `scratch/doctor.py`, installs project-local packages itself, and asks before anything system-wide.
-
-## How it works
-
-Optional reading, for when you want to change something.
 
 ### Who reads what
 
